@@ -1,14 +1,11 @@
-import type { Options } from '@wdio/types'
-
-export const config: Options.Testrunner = {
+exports.config = {
     //
     // ====================
     // Runner Configuration
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
-    runner: ['browser', {
-        preset: 'react'
-    }],
+    runner: "local",
+
     autoCompileOpts: {
         tsNodeOpts: {
             project: './tsconfig.json'
@@ -34,6 +31,7 @@ export const config: Options.Testrunner = {
     //
     specs: [
         // ToDo: define location for spec files here
+        './specs/*.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -69,7 +67,10 @@ export const config: Options.Testrunner = {
         maxInstances: 5,
         //
         browserName: 'chrome',
-        acceptInsecureCerts: true
+        acceptInsecureCerts: true,
+        "goog:chromeOptions": {
+           args: [ "--start-maximized"]
+        }
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -122,7 +123,7 @@ export const config: Options.Testrunner = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver','geckodriver','vscode'],
+    services: ['chromedriver'],
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -144,7 +145,7 @@ export const config: Options.Testrunner = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec','dot','cucumberjs-json','mochawesome'],
+    reporters: ['spec','dot'],
 
 
     
